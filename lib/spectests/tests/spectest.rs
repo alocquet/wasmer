@@ -733,12 +733,9 @@ mod tests {
                         config,
                     )
                     .expect("WASM can't be compiled");
-                    let result = panic::catch_unwind(AssertUnwindSafe(|| {
-                        module
-                            .instantiate(&spectest_import_object)
-                            .expect("WASM can't be instantiated");
-                    }));
-                    match result {
+                    let i = module
+                            .instantiate(&spectest_import_object);
+                    match i {
                         Err(_) => test_report.count_passed(),
                         Ok(_) => {
                             test_report.add_failure(
