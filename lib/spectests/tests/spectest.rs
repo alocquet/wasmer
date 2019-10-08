@@ -733,8 +733,7 @@ mod tests {
                         config,
                     )
                     .expect("WASM can't be compiled");
-                    let i = module
-                            .instantiate(&spectest_import_object);
+                    let i = module.instantiate(&spectest_import_object);
                     match i {
                         Err(_) => test_report.count_passed(),
                         Ok(_) => {
