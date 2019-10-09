@@ -106,7 +106,7 @@ impl Memory {
         assert!(size <= self.size);
 
         // In case we are protecting a size of 0, we prevent
-        // the VirtualAlloc call (as it will fail) and we return direclty
+        // the VirtualAlloc call (as it will fail) and we return directly.
         if size == 0 {
             self.protection = protect;
             return Ok(());
