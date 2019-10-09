@@ -105,6 +105,13 @@ impl Memory {
         let size = round_up_to_page_size(range_end - range_start, page_size);
         assert!(size <= self.size);
 
+        // In case we are protecting a size of 0, we prevent
+        // the VirtualAlloc call (as it will fail) and we return directly.
+        if size == 0 {
+            self.protection = protect;
+            return Ok(());
+        }
+
         // Commit the virtual memory.
         let ptr = VirtualAlloc(start as _, size, MEM_COMMIT, protect_const);
 
